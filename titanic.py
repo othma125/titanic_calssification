@@ -6,6 +6,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import LabelEncoder
+from sklearn.ensemble import RandomForestClassifier
+
+# Reading the data
 train_data = pd.read_csv('train.csv')
 # print(train_data.isnull().sum())
 train_data['Age']=train_data['Age'].fillna(train_data['Age'].mean())
@@ -50,6 +53,36 @@ def logistic_regression():
                           'Survived': new_predict})
   result.to_csv('logistic_regression_result.csv', index=False)
 
+def random_forest():
+  """ Random Forest for titanic survival prediction
+  """
+  print('random forest')
+  # Preprocessing
+  # Only using the 'Sex', "Age" ,"Pclass" and "Fare" feature for prediction
+  # Selecting features and target
+  X = train_data[["Sex", "Age" ,"Pclass","Fare"]]  # Features
+  Y = train_data['Survived']  # Target
+
+  # Splitting the data into training and testing sets
+  x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.3, random_state=42)
+
+  # Random Forest Training
+
+  model = RandomForestClassifier(n_estimators=100)
+  model.fit(x_train, y_train)
+
+  # Calculating the accuracy
+  accuracy = accuracy_score(model.predict(x_test), y_test)
+  print(f'\trandom forest accuracy = {accuracy}')
+
+  #creating submission file
+  new_predict = model.predict(test_data[["Sex", "Age" ,"Pclass","Fare"]])
+  result = pd.DataFrame({'PassengerId': test_data['PassengerId'],
+                          'Survived': new_predict})
+  result.to_csv('random_forest_result.csv', index=False)
+  
+
 
 if __name__ == '__main__':
   logistic_regression()
+  random_forest()
