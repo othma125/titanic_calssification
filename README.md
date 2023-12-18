@@ -10,14 +10,15 @@ The dataset used in this project includes various features of the passengers lik
 - Python 3
 - Pandas
 - Scikit-Learn
+## Output
+The program will generate two CSV files with survival predictions:
 
-For detailed requirements, see `requirements.txt`.
-python titanic_survival_prediction.py
+logistic_regression_result.csv
+random_forest_result.csv
 
 ## Installation
 To run this project, you need to install the necessary dependencies:
 
 ```bash
 pip install -r requirements.txt
-## Usage
 python titanic.py
