@@ -47,6 +47,14 @@ def logistic_regression():
   accuracy = accuracy_score(model.predict(x_test), y_test)
   print(f'\tlogistic regression accuracy = {accuracy}')
 
+  # Calculating the precision
+  precision = precision_score(model.predict(x_test), y_test)
+  print(f'\tlogistic regression precision = {precision}')
+
+  # Calculating the recall
+  recall = recall_score(model.predict(x_test), y_test)
+  print(f'\tlogistic regression recall = {recall}')
+
   #creating submission file
   new_predict = model.predict(test_data[["Sex", "Age" ,"Pclass","Fare"]])
   result = pd.DataFrame({'PassengerId': test_data['PassengerId'],
@@ -74,6 +82,14 @@ def random_forest():
   # Calculating the accuracy
   accuracy = accuracy_score(model.predict(x_test), y_test)
   print(f'\trandom forest accuracy = {accuracy}')
+
+  # Calculating the precision
+  precision = precision_score(model.predict(x_test), y_test)
+  print(f'\trandom forest precision = {precision}')
+
+  # Calculating the recall
+  recall = recall_score(model.predict(x_test), y_test)
+  print(f'\trandom forest recall = {recall}')
 
   #creating submission file
   new_predict = model.predict(test_data[["Sex", "Age" ,"Pclass","Fare"]])
